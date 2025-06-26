@@ -20,7 +20,7 @@ const __dirname  = path.resolve();
 
 const allowedOrigins = [
   "http://localhost:5777",                         // Local dev
-  "https://convofy-frontend.onrender.com"         // Render static frontend
+  "https://convofy-s2kg.onrender.com/"         // Render static frontend
 ];
 
 app.use(cookieParser());

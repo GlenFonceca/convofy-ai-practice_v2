@@ -18,12 +18,14 @@ const PORT  = process.env.PORT || 5001;
 
 const __dirname  = path.resolve();
 
-
-
+const allowedOrigins = [
+  "http://localhost:5777",                         // Local dev
+  "https://convofy-frontend.onrender.com"         // Render static frontend
+];
 
 app.use(cookieParser());
 app.use(cors({
-    origin:"http://localhost:5777",
+    origin:allowedOrigins,
     credentials:true // Allow the frontend to send cookies
 }))
 
@@ -39,13 +41,13 @@ app.use("/api/chat",chatRoutes);
 app.use("/api/speech", speechRoutes);
 
 
-if(process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "../frontend/dist")));
+// if(process.env.NODE_ENV === "production") {
+//     app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-    app.get("*", (req,res)=>{
-        res.sendFile(path.join(__dirname,"../frontend" , "dist" , "index.html"));
-    })
-}
+//     app.get("*", (req,res)=>{
+//         res.sendFile(path.join(__dirname,"../frontend" , "dist" , "index.html"));
+//     })
+// }
 
 app.listen(PORT,()=>{
     console.log(`Server is running on port ${PORT}`);

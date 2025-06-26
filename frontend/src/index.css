@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+    themes: all;
+}
+
+
+*{
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* *{
+  transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+} */
+/* CHAT PAGE STYLES */
+.str-chat__channel {
+ @apply flex items-center justify-center bg-gradient-to-b from-primary to-base-100 h-full;
+}
+
+.str-chat__container {
+  @apply max-w-5xl w-full mx-auto rounded-xl overflow-hidden shadow-2xl;
+  height: 80% !important;
+}
+
+.str-chat__list {
+ @apply  p-3;
+}
+
+.str-chat__list-notifications {
+ @apply hidden;
+}
+
+.str-chat__message-input {
+ @apply   border-t border-base-300 p-4;
+}
+
+.str-chat__textarea__textarea{
+   @apply border-none outline-none px-4 py-3   resize-none;
+} 
+
+

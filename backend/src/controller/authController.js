@@ -130,10 +130,21 @@ export async function login(req, res) {
   }
 }
 
+// export function logout(req, res) {
+//   res.clearCookie("jwt");
+//   res.status(200).json({ success: true, message: "Logout Successfull" });
+// }
+
 export function logout(req, res) {
-  res.clearCookie("jwt");
-  res.status(200).json({ success: true, message: "Logout Successfull" });
+  res.clearCookie("jwt", {
+    httpOnly: true,
+    sameSite: "None", // Must match cookie settings from login/signup
+    secure: true      // Must be true in production with SameSite=None
+  });
+
+  res.status(200).json({ success: true, message: "Logout Successful" });
 }
+
 
 export async function onboard(req, res) {
   try {

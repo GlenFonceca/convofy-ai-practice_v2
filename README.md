@@ -8,8 +8,8 @@
 
 * Choose a **topic** from a curated list of categories.
 * Speak freely while the app **records your voice using WebSockets**.
-* Audio is transcribed using **Vosk**, an offline speech-to-text model.
-* Transcript is evaluated using **LLaMA 3**, an advanced language model.
+* Audio is transcribed using **AssemblyAI**, a powerful speech-to-text API.
+* Transcript is evaluated using a **general-purpose language model** (e.g., GPT-4 or similar) for accurate language proficiency analysis (Used Deepseek).
 * Receive a detailed **evaluation scorecard** for:
 
   * Fluency
@@ -81,8 +81,8 @@ Optimized for **desktop, tablet, and mobile** platforms.
 * [Node.js](https://nodejs.org/) + [Express](https://expressjs.com/)
 * [MongoDB](https://www.mongodb.com/) via Mongoose
 * [Stripe](https://stripe.com/) for payment processing
-* [Vosk](https://alphacephei.com/vosk/) (Python) for speech transcription
-* [Meta LLaMA 3](https://ai.meta.com/llama) for transcript evaluation
+* [AssemblyAI](https://www.assemblyai.com/) for real-time speech transcription
+* [OpenRouter](https://openrouter.ai/) + GPT or equivalent for transcript evaluation
 * JWT-based authentication
 
 ---
@@ -100,9 +100,9 @@ STEAM_API_SECRET=your_steam_api_secret
 
 JWT_SECRET_KEY=your_jwt_secret
 
-LLAMA_API_KEY=your_llama_api_key
-LLAMA_API_ENDPOINT= your_llama_api_endpoint
-LLAMA_MODEL_ID=llama-3-model-id
+MODEL_API_KEY=your_model_api_key
+MODEL_API_ENDPOINT=your_model_api_endpoint
+MODEL_ID=model-id-or-name
 
 STRIPE_SECRET_KEY=your_stripe_secret
 STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
@@ -116,6 +116,7 @@ STRIPE_ANNUAL_PRICE_ID=your_stripe_annual_price_id
 
 ```
 VITE_STREAM_API_KEY=your_stream_key_here
+VITE_API_BASE_URL=your_backend_url/api
 ```
 
 ---
@@ -150,34 +151,12 @@ cd backend
 npm install
 ```
 
-2. **Setup Python Virtual Environment and Vosk**
-
-```bash
-# Navigate to transcription directory
-cd src/vosk_transcriber
-
-# Create and activate virtual environment
-python3 -m venv venv
-source venv/bin/activate  # Linux/macOS
-venv\Scripts\activate     # Windows
-
-# Install Vosk
-pip install vosk
-
-# Download and extract Vosk model into this folder
-# Ensure structure: src/vosk_transcriber/model/
-
-# Return to backend root
-cd ../../../
-```
-
-3. **Configure Environment Variables**
+2. **Configure Environment Variables**
    Create `.env` inside `backend/` and paste the required values.
 
-4. **Start Backend Server**
+3. **Start Backend Server**
 
 ```bash
-#Make sure activating the venv before starting the backend server
 npm start
 ```
 

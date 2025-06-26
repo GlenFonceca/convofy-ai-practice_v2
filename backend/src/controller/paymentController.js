@@ -74,8 +74,8 @@ export const createCheckoutSession = async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url: `http://localhost:5777/payment-success?plan=${plan}`,
-      cancel_url: "http://localhost:5777/payment-failed",
+      success_url: `https://convofy-s2kg.onrender.com/payment-success?plan=${plan}`,
+      cancel_url: "https://convofy-s2kg.onrender.com/payment-failed",
       metadata: {
         plan: plan, // Save plan in metadata
       },

@@ -59,8 +59,6 @@ export const CallPage = () => {
         await callInstance.join({ create: true });
         toast.success("Joined call successfully");
 
-        //console.log("Joined call successfully");
-
         setClient(videoClient);
         setCall(callInstance);
       } catch (error) {
@@ -101,13 +99,20 @@ const CallContent = () => {
 
   const navigate = useNavigate();
 
-  if (callingState === CallingState.LEFT) return navigate("/");
+  // if (callingState === CallingState.LEFT) return navigate("/");
+
+  useEffect(() => {
+    if (callingState === CallingState.LEFT) {
+        window.close(); 
+    }
+  }, [callingState, navigate]);
 
   return (
     <StreamTheme>
-      <SpeakerLayout />
-      <CallControls />
+      <div className="w-full h-full md:flex md:flex-col">
+        <SpeakerLayout />
+        <CallControls buttons={["microphone", "camera", "screen_share", "leave"]} />
+      </div>
     </StreamTheme>
   );
 };
-

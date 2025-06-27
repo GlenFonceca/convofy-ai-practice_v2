@@ -1,14 +1,10 @@
-
-
 import {
   Cpu,
   MessagesSquare,
   Newspaper,
-  Plus,
   Search,
   Speech,
   History,
-  ArrowLeft,
   Plane,
   Clapperboard,
 } from "lucide-react";
@@ -39,7 +35,7 @@ const PracticeWithAiPage = () => {
       "Explain a complex topic in simple terms",
       "Practice a short presentation",
       "Discuss your morning routine",
-      "Talk about your favorite cuisine",
+      "Talk about Own Topic",
     ],
     technology: [
       "Explain artificial intelligence basics",
@@ -82,15 +78,15 @@ const PracticeWithAiPage = () => {
       "Compare urban vs. rural travel destinations",
     ],
     entertainment: [
-  'Describe your favorite movie and why you love it',
-  'Talk about a TV series you recently watched',
-  'Discuss how streaming services are changing entertainment',
-  'Share your thoughts on the influence of social media influencers',
-  'Compare books and movies — which do you prefer and why?',
-  'Talk about your favorite music genre or artist',
-  'Describe a concert or event you attended',
-  'Discuss how entertainment reflects culture and society'
-]
+      'Describe your favorite movie and why you love it',
+      'Talk about a TV series you recently watched',
+      'Discuss how streaming services are changing entertainment',
+      'Share your thoughts on the influence of social media influencers',
+      'Compare books and movies — which do you prefer and why?',
+      'Talk about your favorite music genre or artist',
+      'Describe a concert or event you attended',
+      'Discuss how entertainment reflects culture and society'
+    ]
 
   };
 
@@ -105,7 +101,6 @@ const PracticeWithAiPage = () => {
   };
 
   const handleTopicClick = (seletedTopic) => {
-    //console.log("Selected topic:", seletedTopic);
     navigate("/speech-analysis", {
       state: { topic: seletedTopic },
     });
@@ -115,10 +110,6 @@ const PracticeWithAiPage = () => {
     navigate("/test-history");
   };
 
-  const handleGoBack = () => {
-    navigate(-1); // Go back to previous page
-  };
-
   return (
     <div className="h-full bg-base-100 max-w-screen">
       {/* Header */}
@@ -126,15 +117,8 @@ const PracticeWithAiPage = () => {
         <div className="px-2 sm:px-4 md:px-6 lg:px-8 xl:px-12 py-3 sm:py-4">
           <div className="max-w-7xl mx-auto w-full">
             <div className="flex items-center justify-between">
-              {/* Left side - Back button and Title */}
+              {/* Left side - Title */}
               <div className="flex items-center gap-3 sm:gap-4">
-                {/* <button
-                  onClick={handleGoBack}
-                  className="btn btn-ghost btn-sm sm:btn-md p-2 min-h-0 h-auto"
-                  aria-label="Go back"
-                >
-                  <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-                </button> */}
                 <div>
                   <h1 className="text-base-content text-lg sm:text-xl md:text-2xl font-bold leading-tight tracking-[-0.015em]">
                     Practice with AI

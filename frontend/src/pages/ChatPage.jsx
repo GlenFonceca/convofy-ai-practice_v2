@@ -58,7 +58,7 @@ export const ChatPage = () => {
         //
         const channelId = [authUser._id, targetUserId].sort().join("-");
 
-        //Sorting the ids because when you and me chat 
+        //Sorting the ids because when you and me chat
         // if i start the chat => channelId: [myId, yourId]
         // if you start the chat => channelId: [yourId, myId]  => [myId,yourId]
 
@@ -85,11 +85,15 @@ export const ChatPage = () => {
     if (channel) {
       const callUrl = `${window.location.origin}/call/${channel.id}`;
 
+      // Open the call page in a new tab
+      const callWindow = window.open(callUrl);
+
+      // Send call URL to chat
       channel.sendMessage({
         text: `I've started a video call. Join me here: ${callUrl}`,
       });
 
-      toast.success("Video call link sent successfully!");
+      toast.success("Video call link sent and opened in new tab!");
     }
   };
 
@@ -98,13 +102,13 @@ export const ChatPage = () => {
   return (
     <div className="h-[93vh]">
       <Chat client={chatClient}>
-        <Channel channel={channel} >
+        <Channel channel={channel}>
           <div className="w-full relative">
             <CallButton handleVideoCall={handleVideoCall} />
             <Window>
               <ChannelHeader />
               <MessageList />
-              <MessageInput focus placeholder="Type your message here..."/>
+              <MessageInput focus placeholder="Type your message here..." />
             </Window>
           </div>
           <Thread />
@@ -113,4 +117,3 @@ export const ChatPage = () => {
     </div>
   );
 };
-

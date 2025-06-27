@@ -126,12 +126,11 @@ VITE_API_BASE_URL=your_backend_url/api
 ### Prerequisites
 
 * Node.js (v18 or higher)
-* Python (v3.8 or higher)
-* FFmpeg (for audio conversion)
 * MongoDB Database
 * Stream API Key and Secret
-* Access to LLaMA 3 API
-* [Vosk English Model](https://alphacephei.com/vosk/models) (e.g., `vosk-model-small-en-us-0.15`)
+* Access to GPT model
+* stripe 
+* Assembly AI API
 
 ### 📥 Installation
 

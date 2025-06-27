@@ -11,4 +11,5 @@ const router = express.Router();
 router.post("/webhook",bodyParser.raw({ type: "application/json" }),handleStripeWebhook);
 
 router.post("/create-checkout-session", express.json(),createCheckoutSession);
+
 export default router;

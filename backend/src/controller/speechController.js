@@ -1,5 +1,3 @@
-import fs from "fs";
-import { spawn, execSync } from "child_process";
 import axios from "axios";
 import TestResult from "../models/TestResult.js";
 import { fileURLToPath } from "url";
@@ -22,6 +20,7 @@ export const getTestHistory = async (req, res) => {
 };
 
 export const transcribeAndEvaluate = async (req, res) => {
+
   const MODEL_API_KEY = process.env.MODEL_API_KEY;
   const MODEL_API_ENDPOINT = process.env.MODEL_API_ENDPOINT;
   const MODEL_ID = process.env.MODEL_ID;
@@ -45,7 +44,7 @@ export const transcribeAndEvaluate = async (req, res) => {
       req.file.buffer,
       {
         headers: {
-          authorization: ASSEMBLY_API_KEY, // lowercase key, no 'Bearer'
+          authorization: ASSEMBLY_API_KEY,
           "Content-Type": "application/octet-stream",
         },
       }
@@ -70,7 +69,7 @@ export const transcribeAndEvaluate = async (req, res) => {
     const transcriptId = transcriptResponse.data.id;
     const pollingUrl = `https://api.assemblyai.com/v2/transcript/${transcriptId}`;
 
-    // 3. Polling until transcription is complete
+    // 3. Polling until transcription is complete. Means Calling api untill complete transcript is ready.
     let completed = false;
     while (!completed) {
       const pollingRes = await axios.get(pollingUrl, {
@@ -97,7 +96,7 @@ export const transcribeAndEvaluate = async (req, res) => {
     return res.status(500).json({ error: "Failed to transcribe audio" });
   }
 
-  // ─── model API Evaluation ──────────────────────────────────────────────────
+  // ─── model API Evaluation ─────────────────────────────────────────────────
   try {
     const evaluationPrompt = `
 You are an expert language tutor. Evaluate the following speech transcript provided by a language learner. The user is practicing their speaking skills in the context of the given topic.
@@ -166,7 +165,7 @@ Return ONLY a valid JSON object in the following format:
     let evaluation;
 
     try {
-      evaluation = JSON.parse(raw);
+      evaluation = JSON.parse(raw); //Convert to JSON
     } catch (jsonErr) {
       return res
         .status(500)
@@ -193,6 +192,7 @@ Return ONLY a valid JSON object in the following format:
     });
 
     return res.status(200).json({ transcript: transcriptText, evaluation });
+    
   } catch (modelError) {
     console.error("model API error:", modelError.message);
     return res.status(500).json({ error: "model evaluation failed" });

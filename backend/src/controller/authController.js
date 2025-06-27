@@ -13,12 +13,10 @@ export async function signUp(req, res) {
     }
 
     if (password.length < 6) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Password should be atleast 6 characters",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Password should be atleast 6 characters",
+      });
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -30,16 +28,14 @@ export async function signUp(req, res) {
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      return res
-        .status(400)
-        .json({
-          success: false,
-          message: "Email Already Exists. please use a different One",
-        });
+      return res.status(400).json({
+        success: false,
+        message: "Email Already Exists. please use a different One",
+      });
     }
 
     //Generating Avatar using Random Index
-    const idx = Math.floor(Math.random() * 100) + 1;
+    const idx = Math.floor(Math.random() * 1000) + 1;
     //const randomAvatar = `https://avatar.iran.liara.run/public/${idx}`;
     const randomAvatar = `https://api.dicebear.com/9.x/avataaars/svg/seed=${idx}`;
 
@@ -53,7 +49,7 @@ export async function signUp(req, res) {
     try {
       //CREATE USER IN STREAM
       await upsertStreamUser({
-        id: newUser._id.toString(),
+        id: newUser._id.toString(), //Using MongoDB ID
         name: newUser.fullName,
         image: newUser.profilePic || "",
       });
@@ -62,29 +58,20 @@ export async function signUp(req, res) {
       console.error("Error In creating Stream USer");
     }
 
-    const token = jwt.sign(
-      { userId: newUser._id },
-      process.env.JWT_SECRET_KEY,
-      {
-        expiresIn: "7d",
-      }
-    );
+    const token = jwt.sign({ userId: newUser._id },process.env.JWT_SECRET_KEY,{expiresIn: "7d",});
 
     res.cookie("jwt", token, {
       maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: true,
       sameSite: "None", // Required for cross-site cookies
-      secure: true, // Required when SameSite=None
+      secure: true, // Required when SameSite=None.
     });
 
-    res
-      .status(201)
-      .json({ success: true, message: "Account Created Successfully" });
+    res.status(201).json({ success: true, message: "Account Created Successfully" });
+    
   } catch (error) {
     console.log("Error in SignUp Controller :", error.message);
-    return res
-      .status(500)
-      .json({ success: false, message: "Internal Server Error" });
+    return res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 }
 
@@ -130,21 +117,15 @@ export async function login(req, res) {
   }
 }
 
-// export function logout(req, res) {
-//   res.clearCookie("jwt");
-//   res.status(200).json({ success: true, message: "Logout Successfull" });
-// }
-
 export function logout(req, res) {
   res.clearCookie("jwt", {
     httpOnly: true,
     sameSite: "None", // Must match cookie settings from login/signup
-    secure: true      // Must be true in production with SameSite=None
+    secure: true, // Must be true in production with SameSite=None
   });
 
   res.status(200).json({ success: true, message: "Logout Successful" });
 }
-
 
 export async function onboard(req, res) {
   try {
@@ -181,17 +162,13 @@ export async function onboard(req, res) {
         ...req.body,
         isOnboarded: true,
       },
-      { new: true }
+      { new: true } //To get the reference to updated user in db.
     );
 
     if (!updatedUser)
-      return res
-        .status(401)
-        .json({ success: false, message: "User Not Found" });
+      return res.status(401).json({ success: false, message: "User Not Found" });
 
-    res
-      .status(200)
-      .json({ success: true, message: "Details Updated Successfully" });
+    res.status(200).json({ success: true, message: "Details Updated Successfully" });
 
     try {
       //CREATE USER IN STREAM
@@ -200,6 +177,7 @@ export async function onboard(req, res) {
         name: updatedUser.fullName,
         image: updatedUser.profilePic || "",
       });
+      
       console.log(
         `Stream User Updated after Onboarding for : ${updatedUser.fullName}`
       );

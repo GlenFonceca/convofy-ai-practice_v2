@@ -32,7 +32,6 @@ app.use(cors({
 //using this before using express.json because stripe require raw data
 app.use("/api/payment",paymentRoutes);
 
-
 app.use(express.json());
 
 app.use("/api/auth",authRoutes);

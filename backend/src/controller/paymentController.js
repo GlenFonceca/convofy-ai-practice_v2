@@ -53,6 +53,7 @@ export const handleStripeWebhook = async (req, res) => {
     }
   }
 
+  //Sending response to scripe saying th webhook is processed successfully
   res.status(200).json({ received: true });
 };
 
@@ -81,6 +82,7 @@ export const createCheckoutSession = async (req, res) => {
       },
     });
 
+    //Sending a url for payment to the frontend where user can be navigated to payment page using this url
     res.status(200).json({ url: session.url });
   } catch (error) {
     console.error("Stripe session error:", error.message);

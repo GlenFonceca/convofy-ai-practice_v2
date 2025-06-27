@@ -10,14 +10,13 @@ const __dirname = dirname(__filename);
 
 // Use memory storage instead of saving files to disk
 const storage = multer.memoryStorage();
+
 const upload = multer({ storage });
 
 const router = express.Router();
 
-// POST: Audio upload, transcription, evaluation
 router.post("/upload", protectRoute, upload.single("audio"), transcribeAndEvaluate);
 
-// GET: User's test history
 router.get("/get-test-history", protectRoute, getTestHistory);
 
 export default router;

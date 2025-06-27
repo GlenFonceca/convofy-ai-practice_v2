@@ -6,6 +6,7 @@ export const getMyData = (req,res)=>{
 };
 
 export async function getRecommendedUsers(req,res) {
+
     try {
         const currentUserId = req.user.id;
 
@@ -44,7 +45,7 @@ export async function sendFriendRequest(req,res) {
     try {
 
         const myId = req.user.id;
-        const {id:recipientId} = req.params;
+        const {id:recipientId} = req.params; //from the url getting the id.
 
         if(myId === recipientId){
             return res.status(500).json({message: "You Can't Send Friend Req to YourSelf"});

@@ -58,6 +58,7 @@ export const transcribeAndEvaluate = async (req, res) => {
       {
         audio_url: audioUrl,
         language_code: "en",
+        disfluencies: true
       },
       {
         headers: {

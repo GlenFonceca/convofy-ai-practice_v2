@@ -15,21 +15,6 @@ export const SignUp = () => {
     password: "",
   });
 
-//  // This is how we did it at first, without using our custom hook
-//   const queryClient = useQueryClient();
-//   const {
-//     mutate: signupMutation,
-//     isPending,
-//     error,
-//   } = useMutation({
-//     mutationFn: signup,
-//     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
-//   });
-
-//   if(error){
-//     toast.error(error.response.data.message);
-  // }
-  //This is using our custom hook 
   const { isPending, error, signupMutation } = useSignUp();
 
   const handleSignup = (e) => {
@@ -159,7 +144,7 @@ export const SignUp = () => {
           <div className="max-w-md p-8">
             {/* Illustration */}
             <div className="relative aspect-square max-w-sm mx-auto">
-              <img src="/authPageIcon.png" alt="Language connection illustration" className="w-full h-full" />
+              <img src="/authPageIcon.svg" alt="Language connection illustration" className="w-full h-full" />
             </div>
 
             <div className="text-center space-y-3 mt-6">

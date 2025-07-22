@@ -82,7 +82,7 @@ Optimized for **desktop, tablet, and mobile** platforms.
 * [MongoDB](https://www.mongodb.com/) via Mongoose
 * [Stripe](https://stripe.com/) for payment processing
 * [AssemblyAI](https://www.assemblyai.com/) for real-time speech transcription
-* [OpenRouter](https://openrouter.ai/) + GPT or equivalent for transcript evaluation
+* LLM for transcript evaluation
 * JWT-based authentication
 
 ---

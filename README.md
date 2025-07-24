@@ -1,8 +1,9 @@
 # 🌐 Convofy-AI-Practice
 
 **Convofy** is a responsive and secure web application that helps users practice new languages by connecting with others through **chat**, **video calls**, and **AI-powered English speaking practice**. Built with modern web technologies, Convofy enables a smooth user experience with real-time communication, personalized feedback, and dynamic UI themes.
-## Live Demo
-[Convofy](https://convofy-s2kg.onrender.com/)
+
+## Live Demo  
+[Click here to try Convofy](https://convofy-s2kg.onrender.com/)
 
 ## ✨ Key Features
 
